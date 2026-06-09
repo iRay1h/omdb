@@ -1,0 +1,101 @@
+<div class="container">
+
+  <button (click)="goBack()">
+    ← Volver
+  </button>
+
+  <div *ngIf="error">
+    <h2>Error al cargar la información.</h2>
+  </div>
+
+  <div *ngIf="detail">
+
+    <h1>{{ detail.Title }}</h1>
+
+    <img
+      class="poster"
+      [src]="detail.Poster !== 'N/A'
+        ? detail.Poster
+        : 'https://placehold.co/300x450?text=Sin+Imagen'"
+      [alt]="detail.Title">
+
+    <p><strong>Año:</strong> {{ detail.Year }}</p>
+
+    <p>
+      <strong>Tipo:</strong>
+      {{ detail.Type === 'movie'
+          ? 'Película'
+          : detail.Type === 'series'
+          ? 'Serie'
+          : detail.Type }}
+    </p>
+
+    <p>
+      <strong>Clasificación:</strong>
+      {{ detail.Rated !== 'N/A' ? detail.Rated : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Duración:</strong>
+      {{ detail.Runtime !== 'N/A' ? detail.Runtime : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Fecha de estreno:</strong>
+      {{ detail.Released !== 'N/A' ? detail.Released : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Género:</strong>
+      {{ detail.Genre !== 'N/A' ? detail.Genre : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Director:</strong>
+      {{ detail.Director !== 'N/A' ? detail.Director : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Guionista:</strong>
+      {{ detail.Writer !== 'N/A' ? detail.Writer : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Actores:</strong>
+      {{ detail.Actors !== 'N/A' ? detail.Actors : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>País:</strong>
+      {{ detail.Country !== 'N/A' ? detail.Country : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Idioma:</strong>
+      {{ detail.Language !== 'N/A' ? detail.Language : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Premios:</strong>
+      {{ detail.Awards !== 'N/A' ? detail.Awards : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Calificación IMDb:</strong>
+      {{ detail.imdbRating !== 'N/A' ? detail.imdbRating : 'No disponible' }}
+    </p>
+
+    <p>
+      <strong>Votos IMDb:</strong>
+      {{ detail.imdbVotes !== 'N/A' ? detail.imdbVotes : 'No disponible' }}
+    </p>
+
+    <h3>Trama</h3>
+
+    <p>
+      {{ detail.Plot !== 'N/A' ? detail.Plot : 'No disponible' }}
+    </p>
+
+  </div>
+
+</div>

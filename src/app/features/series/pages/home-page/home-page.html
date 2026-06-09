@@ -1,0 +1,12 @@
+<h1>ROOKIE</h1>
+
+<p>Explorador de películas y series utilizando OMDb API</p>
+
+<div *ngIf="error">
+  Error al cargar información.
+</div>
+
+<app-series-list
+  *ngIf="!error"
+  [series]="series">
+</app-series-list>

@@ -1,0 +1,22 @@
+<div class="card" (click)="goToDetail()">
+
+  <img
+    [src]="serie.Poster !== 'N/A'
+      ? serie.Poster
+      : 'https://placehold.co/300x450?text=Sin+Imagen'"
+    [alt]="serie.Title">
+
+  <h3>{{ serie.Title }}</h3>
+
+  <p><strong>Año:</strong> {{ serie.Year }}</p>
+
+  <p>
+    <strong>Tipo:</strong>
+    {{ serie.Type === 'movie'
+      ? 'Película'
+      : serie.Type === 'series'
+      ? 'Serie'
+      : serie.Type }}
+  </p>
+
+</div>
