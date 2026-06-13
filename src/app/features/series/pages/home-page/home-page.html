@@ -1,12 +1,64 @@
-<h1>ROOKIE</h1>
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">Explora y filtra</span>
+    <h1>Rookie</h1>
+    <p>Descubre series y películas con filtros por género y calificación. Navega página a página en bloques de 10 resultados.</p>
+  </div>
+</section>
 
-<p>Explorador de películas y series utilizando OMDb API</p>
+<div class="page-shell">
+  <div class="toolbar">
+    <div class="filter-group">
+      <label>
+        <span>Tipo</span>
+        <select (change)="onTypeChange($any($event.target).value)">
+          <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.label }}</option>
+        </select>
+      </label>
 
-<div *ngIf="error">
-  Error al cargar información.
+      <label>
+        <span>Género</span>
+        <select (change)="onGenreChange($any($event.target).value)">
+          <option *ngFor="let genre of genreOptions" [value]="genre">{{ genre }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Año</span>
+        <select (change)="onYearChange($any($event.target).value)">
+          <option *ngFor="let year of yearOptions" [value]="year">{{ year }}</option>
+        </select>
+      </label>
+
+      <label>
+        <span>Calificación</span>
+        <select (change)="onRatingChange($any($event.target).value)">
+          <option *ngFor="let option of ratingOptions" [value]="option.value">{{ option.label }}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="pagination-controls">
+      <button type="button" (click)="onPreviousPage()" [disabled]="currentPage === 1">← Anterior</button>
+      <span class="page-indicator">Página {{ pageLabel }}</span>
+      <button type="button" (click)="onNextPage()" [disabled]="currentPage === totalPages">Siguiente →</button>
+    </div>
+  </div>
+
+  <div class="status-row">
+    <div class="result-count">
+      {{ totalResults }} resultados disponibles
+    </div>
+    <div *ngIf="loading" class="loading-message">Cargando resultados...</div>
+    <div *ngIf="error" class="error-message">No se pudo cargar la información. Intenta de nuevo más tarde.</div>
+  </div>
+
+  <app-series-list
+    *ngIf="!error && !loading"
+    [series]="series">
+  </app-series-list>
+
+  <div *ngIf="!error && !loading && !series?.length" class="empty-state">
+    No se encontraron resultados con ese filtro.
+  </div>
 </div>
-
-<app-series-list
-  *ngIf="!error"
-  [series]="series">
-</app-series-list>

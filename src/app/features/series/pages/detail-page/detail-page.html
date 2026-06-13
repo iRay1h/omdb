@@ -62,7 +62,14 @@
 
     <p>
       <strong>Actores:</strong>
-      {{ detail.Actors !== 'N/A' ? detail.Actors : 'No disponible' }}
+      <span *ngIf="detail.Actors && detail.Actors !== 'N/A'">
+        <ng-container *ngFor="let actor of detail.Actors.split(',')">
+          <button class="actor-link" type="button" (click)="viewActor(actor.trim())">
+            {{ actor.trim() }}
+          </button>
+        </ng-container>
+      </span>
+      <span *ngIf="!detail.Actors || detail.Actors === 'N/A'">No disponible</span>
     </p>
 
     <p>
@@ -96,6 +103,33 @@
       {{ detail.Plot !== 'N/A' ? detail.Plot : 'No disponible' }}
     </p>
 
+    <div *ngIf="detail.Type === 'series'" class="season-panel">
+      <h2>Temporadas</h2>
+      <div class="season-list">
+        <button
+          *ngFor="let season of seasonOptions"
+          type="button"
+          [class.active]="season === selectedSeason"
+          (click)="selectSeason(season)">
+          Temporada {{ season }}
+        </button>
+      </div>
+
+      <div *ngIf="seasonLoading" class="status-box">Cargando episodios...</div>
+      <div *ngIf="seasonError" class="status-box error">No se pudo cargar los episodios.</div>
+
+      <div *ngIf="!seasonLoading && episodeDetails?.length" class="episodes-grid">
+        <div *ngFor="let episode of episodeDetails" class="episode-card" (click)="viewEpisode(episode)">
+          <h4>{{ episode.Episode }}. {{ episode.Title }}</h4>
+          <p><strong>IMDb:</strong> {{ episode.imdbRating !== 'N/A' ? episode.imdbRating : 'No disponible' }}</p>
+          <p><strong>Duración:</strong> {{ episode.Runtime !== 'N/A' ? episode.Runtime : 'No disponible' }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="!seasonLoading && !episodeDetails?.length" class="status-box">
+        No hay episodios disponibles para esta temporada.
+      </div>
+    </div>
   </div>
 
 </div>

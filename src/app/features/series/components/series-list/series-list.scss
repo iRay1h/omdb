@@ -1,6 +1,11 @@
 .series-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  justify-items: center;
+  margin-top: 18px;
+}
+
+.series-container app-series-card {
+  width: 100%;
 }

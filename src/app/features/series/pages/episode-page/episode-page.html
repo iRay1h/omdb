@@ -1,0 +1,37 @@
+<div class="detail-shell">
+  <button type="button" (click)="goBack()">← Volver</button>
+
+  <div *ngIf="loading" class="status-box">Cargando capítulo...</div>
+  <div *ngIf="error" class="status-box error">No se pudo cargar la información del capítulo.</div>
+
+  <div *ngIf="detail" class="detail-card">
+    <h1>{{ detail.Title }}</h1>
+    <div class="detail-grid">
+      <img
+        class="poster"
+        [src]="detail.Poster !== 'N/A' ? detail.Poster : 'https://placehold.co/300x450?text=Sin+Imagen'"
+        [alt]="detail.Title">
+
+      <div class="detail-meta">
+        <p><strong>Año:</strong> {{ detail.Year }}</p>
+        <p><strong>Temporada:</strong> {{ detail.Season || 'No disponible' }}</p>
+        <p><strong>Episodio:</strong> {{ detail.Episode || 'No disponible' }}</p>
+        <p><strong>Duración:</strong> {{ detail.Runtime !== 'N/A' ? detail.Runtime : 'No disponible' }}</p>
+        <p><strong>Director:</strong> {{ detail.Director !== 'N/A' ? detail.Director : 'No disponible' }}</p>
+        <p><strong>Guionista:</strong> {{ detail.Writer !== 'N/A' ? detail.Writer : 'No disponible' }}</p>
+        <p><strong>Calificación IMDb:</strong> {{ detail.imdbRating !== 'N/A' ? detail.imdbRating : 'No disponible' }}</p>
+        <p><strong>Actores:</strong></p>
+        <ul>
+          <li *ngFor="let actor of actorList()">
+            <button type="button" class="actor-link" (click)="viewActor(actor)">{{ actor }}</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="detail-section">
+      <h2>Trama</h2>
+      <p>{{ detail.Plot !== 'N/A' ? detail.Plot : 'No disponible' }}</p>
+    </section>
+  </div>
+</div>

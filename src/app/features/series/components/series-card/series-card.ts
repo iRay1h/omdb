@@ -5,14 +5,20 @@ import { Router } from '@angular/router';
   selector: 'app-series-card',
   standalone: false,
   templateUrl: './series-card.html',
-  styleUrl: './series-card.scss'
+  styleUrls: ['./series-card.scss']
 })
 export class SeriesCard {
 
   @Input()
   serie: any;
 
+  hasImageError = false;
+
   constructor(private router: Router) {}
+
+  onImageError() {
+    this.hasImageError = true;
+  }
 
   goToDetail() {
     this.router.navigate(['/detail', this.serie.imdbID]);

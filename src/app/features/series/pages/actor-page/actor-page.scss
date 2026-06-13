@@ -1,0 +1,78 @@
+.detail-shell {
+  max-width: 980px;
+  margin: 34px auto 40px;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 26px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+}
+
+button {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 18px;
+  background: #0f172a;
+  color: #f8fafc;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.status-box {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.status-box.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.detail-card {
+  margin-top: 24px;
+}
+
+.subtitle {
+  margin-top: 0;
+  color: #475569;
+}
+
+.actor-results {
+  display: grid;
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.actor-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 18px;
+  background: #f8fafc;
+  border-radius: 22px;
+  padding: 18px;
+  align-items: center;
+}
+
+.actor-item img {
+  width: 140px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.actor-item button {
+  margin-top: 12px;
+}
+
+@media (max-width: 720px) {
+  .actor-item {
+    grid-template-columns: 1fr;
+  }
+
+  .actor-item img {
+    width: 100%;
+    height: auto;
+  }
+}

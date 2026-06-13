@@ -1,0 +1,25 @@
+<div class="detail-shell">
+  <button type="button" (click)="goBack()">← Volver</button>
+
+  <div *ngIf="loading" class="status-box">Cargando información del actor...</div>
+  <div *ngIf="error" class="status-box error">No se pudo encontrar información del actor.</div>
+
+  <div *ngIf="actorData" class="detail-card">
+    <h1>{{ actorName }}</h1>
+    <p class="subtitle">Resultados aproximados de búsqueda con OMDb</p>
+
+    <div class="actor-results">
+      <div *ngFor="let item of actorData.Search" class="actor-item">
+        <img
+          [src]="item.Poster !== 'N/A' ? item.Poster : 'https://placehold.co/300x450?text=Sin+Imagen'"
+          [alt]="item.Title" />
+        <div>
+          <h3>{{ item.Title }}</h3>
+          <p><strong>Año:</strong> {{ item.Year }}</p>
+          <p><strong>Tipo:</strong> {{ item.Type }}</p>
+          <button type="button" (click)="viewDetail(item.imdbID)">Ver detalles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

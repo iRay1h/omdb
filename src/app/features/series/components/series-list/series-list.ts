@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
   selector: 'app-series-list',
   standalone: false,
   templateUrl: './series-list.html',
-  styleUrl: './series-list.scss'
+  styleUrls: ['./series-list.scss']
 })
 export class SeriesList {
 

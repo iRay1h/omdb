@@ -1,22 +1,31 @@
 <div class="card" (click)="goToDetail()">
+  <div class="poster-wrapper">
+    <ng-container *ngIf="serie.Poster && serie.Poster !== 'N/A' && !hasImageError; else fallbackImage">
+      <img
+        [src]="serie.Poster"
+        [alt]="serie.Title"
+        (error)="onImageError()"
+      />
+    </ng-container>
 
-  <img
-    [src]="serie.Poster !== 'N/A'
-      ? serie.Poster
-      : 'https://placehold.co/300x450?text=Sin+Imagen'"
-    [alt]="serie.Title">
+    <ng-template #fallbackImage>
+      <div class="no-image">Sin imagen</div>
+    </ng-template>
+  </div>
 
-  <h3>{{ serie.Title }}</h3>
-
-  <p><strong>Año:</strong> {{ serie.Year }}</p>
-
-  <p>
-    <strong>Tipo:</strong>
-    {{ serie.Type === 'movie'
-      ? 'Película'
-      : serie.Type === 'series'
-      ? 'Serie'
-      : serie.Type }}
-  </p>
-
+  <div class="card-body">
+    <h3>{{ serie.Title }}</h3>
+    <p><strong>Año:</strong> {{ serie.Year }}</p>
+    <p>
+      <strong>Tipo:</strong>
+      {{ serie.Type === 'movie'
+        ? 'Película'
+        : serie.Type === 'series'
+        ? 'Serie'
+        : serie.Type }}
+    </p>
+    <p *ngIf="serie.imdbRating && serie.imdbRating !== 'N/A'">
+      <strong>IMDb:</strong> {{ serie.imdbRating }}
+    </p>
+  </div>
 </div>
