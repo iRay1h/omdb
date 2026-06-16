@@ -1,4 +1,4 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule, provideBrowserGlobalErrorListeners, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { ActorPage } from './features/series/pages/actor-page/actor-page';
 import { SeriesList } from './features/series/components/series-list/series-list';
 import { SeriesCard } from './features/series/components/series-card/series-card';
 import { AppRoutingModule } from './app-routing-module';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,13 @@ import { AppRoutingModule } from './app-routing-module';
   BrowserModule,
   CommonModule,
   HttpClientModule,
-  AppRoutingModule
+  AppRoutingModule,
+  ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: !isDevMode(),
+    // Register the ServiceWorker as soon as the application is stable
+    // or after 30 seconds (whichever comes first).
+    registrationStrategy: 'registerWhenStable:30000'
+  })
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
